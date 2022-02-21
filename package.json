@@ -1,0 +1,27 @@
+{
+  "name": "wallet",
+  "version": "1.0.0",
+  "description": "Fully working Wallet based on NodeJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agrawalia/Wallet-App.git"
+  },
+  "author": "Ishan Agrawal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agrawalia/Wallet-App/issues"
+  },
+  "homepage": "https://github.com/agrawalia/Wallet-App#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3"
+  }
+}
