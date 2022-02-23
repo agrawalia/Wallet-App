@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        select: false
+        select: true
       },
     // emailToken: {
     //     type : String,
@@ -60,10 +60,10 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = async function() {
     try{
-        console.log(this._id);
+        console.log(this._id.toString());
         const obj = jwt.sign({_id:this._id.toString()},"mynameisishanagrawalfromsolulabindia");
         console.log(obj);
-        this.tokens = tokens.concat({token : obj})
+        this.tokens = this.tokens.concat({token : obj})
         await this.save();
         return obj;
     }catch(error){

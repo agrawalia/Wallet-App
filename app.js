@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const conn = require('./src/db/conn');
 const Signup = require('./src/models/signup');
 const SignUpRoutes = require('./src/routes/signup');
+const loginRoutes = require('./src/routes/login');
 
 const port = process.env.PORT || 8000;
 const app= express();
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
 //POST request signup
 app.use('/api',SignUpRoutes);
+app.use('/api',loginRoutes);
 
 
 

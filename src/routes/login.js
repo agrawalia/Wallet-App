@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {body} = require('express-validator/check');
-const signUpController = require('../controllers/signup');
+const loginController = require('../controllers/login');
 
-// /api/signup
-router.post('/signup', signUpController.getPosts);
-
+// /api/login
+router.post('/login',loginController.getLogin);
 module.exports = router;
