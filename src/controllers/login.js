@@ -8,6 +8,8 @@ exports.getLogin = async (req, res, next) =>{
         const password = req.body.password;
 
         const userEmail = await Post.findOne({email : email});
+        if(!userEmail)
+            res.send("Please sign Up");
         const token = await userEmail.generateAuthToken();
         console.log(token);
 

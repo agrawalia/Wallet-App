@@ -26,39 +26,26 @@ const userSchema = new mongoose.Schema({
         required: true,
         select: true
       },
-    // emailToken: {
-    //     type : String,
-    //     required: false
-    // },
-    // isVerified: {
-    //     type : Boolean,
-    //     default: false,
-    //     required: false
-    // },
-    // wallet: {
     balance: {
         type : Number,
         default: 5000,
         required: false
-        },
+     },
+    confirmed : {
+        type: Boolean,
+        default : false,
+        required: false
+    },
     tokens:[{
             token :{
                 type : String,
-                required: true 
+                required: false
             }
-    }]
-    //     isPaid: { 
-    //         type: Boolean, 
-    //         default: false,
-    //         required: false 
-    //     }
-    //   },
+    }]          
       
-          
-      
-},{timestamps : true})
+},{timestamps : true});
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function(req,res) {
     try{
         console.log(this._id.toString());
         const obj = jwt.sign({_id:this._id.toString()},"mynameisishanagrawalfromsolulabindia");
@@ -67,7 +54,6 @@ userSchema.methods.generateAuthToken = async function() {
         await this.save();
         return obj;
     }catch(error){
-        res.send("the error part "+ error);
         console.log("the error part "+ error);
     }
 }

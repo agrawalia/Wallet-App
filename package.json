@@ -18,15 +18,22 @@
   },
   "homepage": "https://github.com/agrawalia/Wallet-App#readme",
   "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.28.0",
     "nodemon": "^2.0.15"
   },
   "dependencies": {
     "body-parser": "^1.19.2",
     "connect-mongodb-session": "^3.1.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.3"
+    "mailgun-js": "^0.22.0",
+    "mongoose": "^6.2.3",
+    "nodemailer": "^6.7.2",
+    "uuid": "^8.3.2"
   }
 }
