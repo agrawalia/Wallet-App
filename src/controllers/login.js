@@ -1,5 +1,4 @@
 const loginRoutes = require("../routes/login");
-const { validationResult } = require("express-validator");
 const Post = require("../models/signup");
 
 exports.getLogin = async (req, res, next) => {

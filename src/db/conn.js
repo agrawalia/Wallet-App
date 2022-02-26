@@ -7,9 +7,9 @@ mongoose
     // useCreateIndex: true
   })
   .then(() => {
-    console.log("connection successfull");
+    console.log("mongodb connection successfull");
   })
   .catch((err) => {
     console.log(err);
-    console.log("unsuccessfull");
+    console.log("mongodb connection unsuccessfull");
   });

@@ -1,5 +1,4 @@
 const signUpRoutes = require("../routes/signup");
-const { validationResult } = require("express-validator");
 const Post = require("../models/signup");
 
 const mailgun = require("mailgun-js");
