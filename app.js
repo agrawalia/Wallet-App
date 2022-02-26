@@ -1,16 +1,17 @@
 const express = require("express");
 const bodyparser = require("body-parser");
-const { body } = require("express-validator");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
 
 const conn = require("./src/db/conn");
 const Signup = require("./src/models/signup");
+const transaction = require("./src/models/transaction");
 const SignUpRoutes = require("./src/routes/signup");
-const loginRoutes = require("./src/routes/login");
+const LoginRoutes = require("./src/routes/login");
+const TransactionRoutes = require("./src/routes/transaction");
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 const app = express();
 
 app.use(bodyparser.json());
@@ -25,8 +26,12 @@ app.use((req, res, next) => {
 
 //POST request signup
 app.use("/api", SignUpRoutes);
-app.use("/api", loginRoutes);
+
+//POST request signin
+app.use("/api", LoginRoutes);
+
+app.use("/api", TransactionRoutes);
 
 app.listen(port, () => {
-  console.log("Server is running");
+  console.log(`Server is running at port ${port}`);
 });

@@ -1,5 +1,4 @@
 const signUpRoutes = require("../routes/signup");
-const { validationResult } = require("express-validator");
 const Post = require("../models/signup");
 
 const mailgun = require("mailgun-js");
@@ -7,7 +6,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv/config");
 const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN });
 
-// signup send verification  email
+/* Send Email Verification Mail to User on Signup */
 exports.getPosts = async (req, res, next) => {
   try {
     const name = req.body.name;
@@ -26,7 +25,7 @@ exports.getPosts = async (req, res, next) => {
       from: "noreply@ishan.com",
       to: email,
       subject: "Account Activation Link",
-      html: `<h2> Please click on given link to activate your account </h2><br><p><a>${url}</a></p>`,
+      html: `<h2> Please click on given link to activate your account </h2><br><p><a href=${url}>Click here</a></p>`,
     };
     mg.messages().send(data, function (error, body) {
       if (error) {
@@ -44,7 +43,7 @@ exports.getPosts = async (req, res, next) => {
   }
 };
 
-// signup success after email verification
+/* Signup Success after Email Verification */
 exports.activateAccount = async (req, res, next) => {
   const { token } = req.body;
   if (token) {
@@ -55,7 +54,6 @@ exports.activateAccount = async (req, res, next) => {
         if (err) {
           return res.status(400).json({ err: "Incorrect or expired link" });
         }
-
         const { name, email, password, role, balance } = decodeToken;
         const signupRecords = new Post({
           name: name,
@@ -66,9 +64,11 @@ exports.activateAccount = async (req, res, next) => {
           confirmed: true,
         });
         const token = await signupRecords.generateAuthToken();
-        console.log(signupRecords);
         const insertRecord = await signupRecords.save();
-        res.send("SignUp success!!");
+        res.json({
+          message: "You have successfully SignUp",
+          balance: balance,
+        });
         console.log("SignUp success!!");
       }
     );

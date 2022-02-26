@@ -49,6 +49,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// To maintain JWT user session
 userSchema.methods.generateAuthToken = async function (req, res) {
   try {
     console.log(this._id.toString());

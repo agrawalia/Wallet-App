@@ -1,7 +1,7 @@
 const loginRoutes = require("../routes/login");
-const { validationResult } = require("express-validator");
 const Post = require("../models/signup");
 
+/* Login with Password */
 exports.getLogin = async (req, res, next) => {
   try {
     const email = req.body.email;
