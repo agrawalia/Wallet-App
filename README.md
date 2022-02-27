@@ -1,9 +1,6 @@
-
 # Wallet App
 
 A Fully Working Wallet Based on Nodejs, Express and MongoDB
-
-
 
 ## Features
 
@@ -15,7 +12,6 @@ A Fully Working Wallet Based on Nodejs, Express and MongoDB
 - Show Transaction Details
 - Send Transaction Success/Failure Details to User on Email
 
-
 ## Installation
 
 Install my-project with npm
@@ -25,22 +21,28 @@ Install my-project with npm
   cd wallet-app
 ```
 
-    
 ## Run Locally
 
 Clone the project
+
 ```bash
-git clone https:/https://github.com/agrawalia/Wallet-App.git
+git clone https://github.com/agrawalia/Wallet-App.git
 ```
+
 Go to project directory
+
 ```bash
 cd Wallet-App
 ```
+
 Install dependencies
+
 ```bash
 npm install
 ```
+
 Run project
+
 ```bash
 npm start
 ```
@@ -64,5 +66,3 @@ To run this project, you will need to add the following environment variables to
 `MONGODB_CONNECT`
 
 `PORT`
-
-
