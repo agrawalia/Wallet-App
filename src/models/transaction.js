@@ -1,6 +1,5 @@
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-require("dotenv/config");
+import mongoose from "mongoose";
+import "dotenv/config";
 
 const transactionSchema = new mongoose.Schema({
   from: {
