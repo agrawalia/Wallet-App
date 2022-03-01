@@ -1,10 +1,10 @@
-const express = require("express");
+import express from "express";
+import TransactionController from "../controllers/transaction";
 const router = express.Router();
-const TransactionController = require("../controllers/transaction");
 
-// /api/transfer{body : from,to,amount}
+// /transaction/transfer{body : from,to,amount}
 router.post("/transfer", TransactionController.transferAmount);
 
-// /api/transactionDetails
+// /transaction/transactionDetails
 router.get("/transactionDetails", TransactionController.getTransactionDetails);
 module.exports = router;

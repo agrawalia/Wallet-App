@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-require("dotenv/config");
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
 
 const userSchema = new mongoose.Schema(
   {

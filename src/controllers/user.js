@@ -1,9 +1,9 @@
-const signUpRoutes = require("../routes/signup");
-const Post = require("../models/signup");
+import UserRoutes from "../routes/user";
+import Post from "../models/user";
 
-const mailgun = require("mailgun-js");
-const jwt = require("jsonwebtoken");
-require("dotenv/config");
+import mailgun from "mailgun-js";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
 const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN });
 
 /* Send Email Verification Mail to User on Signup */
@@ -20,7 +20,6 @@ exports.getPosts = async (req, res, next) => {
       { expiresIn: "20m" }
     );
     const url = `${process.env.CLIENT_URL}/authentication/activate/${token}`;
-    console.log(url);
     const data = {
       from: "noreply@ishan.com",
       to: email,
@@ -33,13 +32,14 @@ exports.getPosts = async (req, res, next) => {
           error: error.message,
         });
       }
-      console.log(body);
       return res.json({
         message: "Email has been sent kindly activate your account.",
       });
     });
   } catch (exe) {
-    console.log("SignUp fail");
+    return res.json({
+      message: "SignUp failed",
+    });
   }
 };
 
@@ -69,7 +69,6 @@ exports.activateAccount = async (req, res, next) => {
           message: "You have successfully SignUp",
           balance: balance,
         });
-        console.log("SignUp success!!");
       }
     );
   } else {
@@ -77,4 +76,21 @@ exports.activateAccount = async (req, res, next) => {
       error: "Something went wrong",
     });
   }
+};
+
+/* Login with Password */
+exports.getLogin = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const userEmail = await Post.findOne({ email: email });
+    if (!userEmail) res.send("Please sign Up");
+    else {
+      const token = await userEmail.generateAuthToken();
+
+      if (userEmail.password === password) res.send("Successfully logged in");
+      else res.send("Invalid credentials");
+    }
+  } catch (exe) {}
 };

@@ -1,10 +1,9 @@
-const TransactionRoutes = require("../routes/transaction");
-const Transaction = require("../models/transaction");
-const Post = require("../models/signup");
+import TransactionRoutes from "../routes/transaction";
+import Transaction from "../models/transaction";
+import Post from "../models/user";
 
-const mailgun = require("mailgun-js");
-const jwt = require("jsonwebtoken");
-require("dotenv/config");
+import mailgun from "mailgun-js";
+import "dotenv/config";
 const mg = mailgun({ apiKey: process.env.API_KEY, domain: process.env.DOMAIN });
 
 /* Manage Transfer Functionality between Users */
@@ -19,14 +18,11 @@ exports.transferAmount = async (req, res, next) => {
 
     if (sender.balance < amount) {
       res.json({ message: "Not sufficient balance" });
-      console.log("Not sufficient balance");
     } else {
       sender.balance = sender.balance - amount;
-      console.log(sender.balance);
       const insertRecordSender = await sender.save();
 
       receiver.balance = receiver.balance + amount;
-      console.log(receiver.balance);
       const insertRecordReceiver = await receiver.save();
 
       const insertTransaction = new Transaction(req.body);
@@ -47,14 +43,12 @@ exports.transferAmount = async (req, res, next) => {
             error: error.message,
           });
         }
-        console.log(body);
         return res.json({
           message: "Amount transferred successfully",
         });
       });
     }
   } catch (exe) {
-    console.log("Transfer failed");
     res.send("Transfer failed");
 
     const data = {
@@ -69,7 +63,6 @@ exports.transferAmount = async (req, res, next) => {
           error: error.message,
         });
       }
-      console.log(body);
       return res.json({
         message: "Transaction failed",
       });
@@ -77,7 +70,7 @@ exports.transferAmount = async (req, res, next) => {
   }
 };
 
-// Show Transaction Details
+/* Show Transaction Details */
 exports.getTransactionDetails = async (req, res, next) => {
   try {
     const insertTransaction = await Transaction.find({});
